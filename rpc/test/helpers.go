@@ -95,7 +95,7 @@ func createConfig() *cfg.Config {
 	tm, rpc, grpc := makeAddrs()
 	c.P2P.ListenAddress = tm
 	c.RPC.ListenAddress = rpc
-	c.RPC.CORSAllowedOrigins = []string{"https://tendermint.com/"}
+	c.RPC.CORSAllowedOrigins = []string{"https:/.com/"}
 	c.RPC.GRPCListenAddress = grpc
 	c.TxIndex.IndexTags = "app.creator,tx.height" // see kvstore application
 	return c

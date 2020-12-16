@@ -24,8 +24,8 @@ In the future, we plan to support scriptable transactions (see
 ### Docker
 
 ```
-docker run -it --rm -v "/tmp:/tendermint" tendermint/tendermint init
-docker run -it --rm -v "/tmp:/tendermint" -p "26657:26657" --name=tm tendermint/tendermint node --proxy_app=kvstore
+docker run -it --rm -v "/tmp:t init
+docker run -it --rm -v "/tmp::26657" --name=tm tendermint node --proore
 
 docker run -it --rm --link=tm tendermint/bench tm:26657
 ```

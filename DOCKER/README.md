@@ -28,9 +28,9 @@
 
 Tendermint Core is Byzantine Fault Tolerant (BFT) middleware that takes a state transition machine, written in any programming language, and securely replicates it on many machines.
 
-For more background, see the [the docs](https://tendermint.com/docs/introduction/#quick-start).
+For more background, see the [the docs](https:/.com/docs/introduction/#quick-start).
 
-To get started developing applications, see the [application developers guide](https://tendermint.com/docs/introduction/quick-start.html).
+To get started developing applications, see the [application developers guide](https:/.com/docs/introduction/quick-start.html).
 
 ## How to use this image
 
@@ -39,8 +39,8 @@ To get started developing applications, see the [application developers guide](h
 A quick example of a built-in app and Tendermint core in one container.
 
 ```
-docker run -it --rm -v "/tmp:/tendermint" tendermint/tendermint init
-docker run -it --rm -v "/tmp:/tendermint" tendermint/tendermint node --proxy_app=kvstore
+docker run -it --rm -v "/tmp:" tendermint init
+docker run -it --rm -v "/tmp:" tendermint node --proxy_app=kvstore
 ```
 
 ## Local cluster

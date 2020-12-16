@@ -2,7 +2,7 @@
 
 DEPRECATED!
 
-See the [docs](https://tendermint.com/docs/networks/docker-compose.html).
+See the [docs](https:/.com/docs/networks/docker-compose.html).
 
 ## Requirements
 
@@ -52,7 +52,7 @@ make localnet-start
 
 The `make localnet-start` creates files for a 4-node testnet in `./build` by calling the `tendermint testnet` command.
 
-The `./build` directory is mounted to the `/tendermint` mount point to attach the binary and config files to the container.
+The `./build` directory is mounted to the `` mount point to attach the binary and config files to the container.
 
 For instance, to create a single node testnet:
 
@@ -66,10 +66,10 @@ rm -rf ./build
 make build-linux
 
 # Create configuration
-docker run -e LOG="stdout" -v `pwd`/build:/tendermint tendermint/localnode testnet --o . --v 1
+docker run -e LOG="stdout" -v `pwd`/build: tendermint/localnode testnet --o . --v 1
 
 #Run the node
-docker run -v `pwd`/build:/tendermint tendermint/localnode
+docker run -v `pwd`/build: tendermint/localnode
 
 ```
 

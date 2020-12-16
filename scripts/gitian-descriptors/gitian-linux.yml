@@ -92,7 +92,7 @@ script: |
       -asmflags=all=-trimpath=${GOPATH} \
       -mod=readonly -tags "tendermint" \
       -ldflags="${LDFLAGS}" \
-      -o ${INSTALLPATH}/tendermint ./cmd/tendermint/
+      -o ${INSTALLPATH}
 
     popd # ${distsrc}
 

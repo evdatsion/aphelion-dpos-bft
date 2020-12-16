@@ -1,12 +1,12 @@
 FROM alpine:3.9
 LABEL maintainer="hello@tendermint.com"
 
-# Tendermint will be looking for the genesis file in /tendermint/config/genesis.json
+# Tendermint will be looking for the genesis file in /config/genesis.json
 # (unless you change `genesis_file` in config.toml). You can put your config.toml and
-# private validator file into /tendermint/config.
+# private validator file into /config.
 #
-# The /tendermint/data dir is used by tendermint to store state.
-ENV TMHOME /tendermint
+# The /data dir is used by tendermint to store state.
+ENV TMHOME 
 
 # OS environment setup
 # Set user right away for determinism, create directory for persistence and give our user ownership
@@ -30,10 +30,10 @@ WORKDIR $TMHOME
 # p2p and rpc port
 EXPOSE 26656 26657
 
-ENTRYPOINT ["/usr/bin/tendermint"]
+ENTRYPOINT ["/usr/bin"]
 CMD ["node", "--moniker=`hostname`"]
 STOPSIGNAL SIGTERM
 
 ARG BINARY=tendermint
-COPY $BINARY /usr/bin/tendermint
+COPY $BINARY /usr/bin
 

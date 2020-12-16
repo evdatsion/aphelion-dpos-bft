@@ -62,10 +62,10 @@ gopath-setup:
 
 build-tendermint: git-branch gopath-setup
 	@echo "*** Building tendermint"
-	go get -d -u github.com/evdatsion/aphelion-dpos-bft/cmd/tendermint
+	go get -d -u github.com/evdatsion/aphelion-dpos-bft/cmd
 	cd $(GOPATH)/src/github.com/evdatsion/aphelion-dpos-bft && git checkout "$(GIT_BRANCH)" && git pull
 	export PATH=$(GOPATH)/bin:$(PATH) && $(MAKE) -C $(GOPATH)/src/github.com/evdatsion/aphelion-dpos-bft get_tools build
-	cp $(GOPATH)/src/github.com/evdatsion/aphelion-dpos-bft/build/tendermint $(GOPATH)/bin
+	cp $(GOPATH)/src/github.com/evdatsion/aphelion-dpos-bft/buildbin
 	@echo "*** Built tendermint"
 
 build-ethermint: git-branch gopath-setup
@@ -193,25 +193,25 @@ package-deb-%: folder-%
 install-rpm-%: version-%
 #Make sure your host has the IAM role to read/write the S3 bucket OR that you set up ~/.boto
 	@echo "*** Uploading $*-$($*_version)-$(BUILD_NUMBER).x86_64.rpm to AWS $(DEVOPS_PATH)CentOS repository"
-	aws s3 sync s3://tendermint-packages/$(DEVOPS_PATH)centos/ tmp/s3/ --delete
+	aws s3 sync s3:/(DEVOPS_PATH)centos/ tmp/s3/ --delete
 	mkdir -p tmp/s3/7/os/x86_64/Packages
 	cp RPMS/x86_64/$*-$($*_version)-$(BUILD_NUMBER).x86_64.rpm tmp/s3/7/os/x86_64/Packages
 	cp ./RPM-GPG-KEY-Tendermint tmp/s3/7/os/x86_64/
-	cp ./tendermint.repo tmp/s3/7/os/x86_64/
+	cp .3/7/os/x86_64/
 	rm -f tmp/s3/7/os/x86_64/repodata/*.bz2 tmp/s3/7/os/x86_64/repodata/*.gz tmp/s3/7/os/x86_64/repodata/repomd.xml.asc
-	createrepo tmp/s3/7/os/x86_64/Packages -u https://tendermint-packages.interblock.io/$(DEVOPS_PATH)centos/7/os/x86_64/Packages -o tmp/s3/7/os/x86_64 --update -S --repo Tendermint --content tendermint --content basecoind --content ethermint
+	createrepo tmp/s3/7/os/x86_64/Packages -u https:/nterblock.io/$(DEVOPS_PATH)centos/7/os/x86_64/Packages -o tmp/s3/7/os/x86_64 --update -S --repo Tendermint --content tendermint --content basecoind --content ethermint
 	gpg --batch --passphrase "$(GPG_PASSPHRASE)" --detach-sign -a tmp/s3/7/os/x86_64/repodata/repomd.xml
-	aws s3 sync tmp/s3/ s3://tendermint-packages/$(DEVOPS_PATH)centos/ --delete --acl public-read
+	aws s3 sync tmp/s3/ s3:/(DEVOPS_PATH)centos/ --delete --acl public-read
 	@echo "*** Uploaded $* to AWS $(DEVOPS_PATH)CentOS repository"
 
 install-deb-%: version-%
 	@echo "*** Uploading $*-$($*_version)-$(BUILD_NUMBER)_amd64.deb to AWS $(DEVOPS_PATH)Debian repository"
 	@echo "Testing if $*-$($*_version)-$(BUILD_NUMBER)_amd64.deb is already uploaded"
 	test ! -f tmp/debian-s3/pool/$*-$($*_version)-$(BUILD_NUMBER)_amd64.deb
-	aws s3 sync s3://tendermint-packages/$(DEVOPS_PATH)debian/ tmp/debian-s3/ --delete
+	aws s3 sync s3:/(DEVOPS_PATH)debian/ tmp/debian-s3/ --delete
 	@echo "Testing if $*-$($*_version)-$(BUILD_NUMBER)_amd64.deb is already uploaded"
 	test ! -f tmp/debian-s3/pool/$*-$($*_version)-$(BUILD_NUMBER)_amd64.deb
-	cp ./tendermint.list tmp/debian-s3/
+	cp .ebian-s3/
 	mkdir -p tmp/debian-s3/pool tmp/debian-s3/dists/stable/main/binary-amd64
 	cp RPMS/$*-$($*_version)-$(BUILD_NUMBER)_amd64.deb tmp/debian-s3/pool
 	cp ./Release_amd64 tmp/debian-s3/dists/stable/main/binary-amd64/Release
@@ -267,7 +267,7 @@ install-deb-%: version-%
 	gpg --batch --passphrase "$(GPG_PASSPHRASE)" --digest-algo SHA512 --clearsign tmp/debian-s3/dists/stable/Release
 	mv tmp/debian-s3/dists/stable/Release.asc tmp/debian-s3/dists/stable/InRelease
 
-	aws s3 sync tmp/debian-s3/ s3://tendermint-packages/$(DEVOPS_PATH)debian/ --delete --acl public-read
+	aws s3 sync tmp/debian-s3/ s3:/(DEVOPS_PATH)debian/ --delete --acl public-read
 	@echo "*** Uploaded $*-$($*_version)-$(BUILD_NUMBER)_amd64.deb to AWS $(DEVOPS_PATH)Debian repository"
 
 mostlyclean:
@@ -280,7 +280,7 @@ distclean: clean
 	rm -rf $(GOPATH)/src/github.com/evdatsion/aphelion-dpos-bft
 	rm -rf $(GOPATH)/src/github.com/cosmos/cosmos-sdk
 	rm -rf $(GOPATH)/src/github.com/evdatsion/ethermint 
-	rm -rf $(GOPATH)/bin/tendermint
+	rm -rf $(GOPATH)/bin
 	rm -rf $(GOPATH)/bin/basecoind
 	rm -rf $(GOPATH)/bin/ethermint
 	rm -rf $(GOPATH)/bin/gaia

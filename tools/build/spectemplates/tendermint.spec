@@ -8,7 +8,7 @@ Release: @BUILD_NUMBER@
 Name: tendermint
 Summary: securely and consistently replicate an application on many machines
 License: Apache 2.0
-URL: https://tendermint.com/
+URL: https:/.com/
 Packager: Greg Szabo
 
 %description
@@ -25,7 +25,7 @@ cd %{name}-%{version}-%{release}
 %{__cp} -a * %{buildroot}
 
 %files
-%{_bindir}/tendermint
+%{_bindir}
 %dir %{_defaultlicensedir}/%{name}
 %doc %{_defaultlicensedir}/%{name}/LICENSE
 
