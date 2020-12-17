@@ -1,4 +1,5 @@
 // Protocol Buffers for Go with Gadgets
+//remove the dependency
 //
 // Copied from https://github.com/gogo/protobuf/blob/master/gogoproto/gogo.proto
 //

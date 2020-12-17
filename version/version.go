@@ -8,7 +8,7 @@ var (
 
 const (
 	// ABCISemVer is the semantic version of the ABCI library
-	ABCISemVer = "0.17.0"
+	ABCISemVer = "0.1.3"
 
 	ABCIVersion = ABCISemVer
 )
